@@ -3,13 +3,12 @@
 @section('title', 'Confirmar Tranferência')
 
 @section('content_header')
-    <h1>Confirmar Transferência</h1>
 
-    <ol class="breadcrumb">
-        <li><a href="">Dashboard</a></li>
-        <li><a href="">Saldo</a></li>
-        <li><a href="">Transferir</a></li>
-        <li><a href="">Confirmação</a></li>
+    <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="{{ route('admin') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('balance') }}">Saldo</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('transfer') }}">Transferir</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('transfer') }}">Confirmação</a></li>
     </ol>
 @stop
 

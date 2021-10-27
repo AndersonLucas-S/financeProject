@@ -3,12 +3,11 @@
 @section('title', 'Transferir Saldo')
 
 @section('content_header')
-    <h1>Fazer Transferência</h1>
 
-    <ol class="breadcrumb">
-        <li><a href="">Dashboard</a></li>
-        <li><a href="">Saldo</a></li>
-        <li><a href="">Transferir</a></li>
+    <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="{{ route('admin') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('balance') }}">Saldo</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('transfer') }}">Transferir</a></li>
     </ol>
 @stop
 
@@ -20,7 +19,7 @@
         <div class="box-body">
             @include('admin.includes.alerts')
 
-            <form method="POST" action="{{ route('confirm.transfer') }}">
+            <form method="POST" action="{{ route('transfer.confirm') }}">
                 {!! csrf_field() !!}
 
                 <div class="form-group">

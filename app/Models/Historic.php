@@ -2,13 +2,23 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-use App\User;
+use App\Models\User;
 
 class Historic extends Model
 {
-    protected $fillable = ['type', 'amount', 'total_before', 'total_after', 'user_id_transaction', 'date'];
+    use HasFactory;
+
+    protected $fillable = [
+        'type',
+        'amount',
+        'total_before',
+        'total_after',
+        'user_id_transaction',
+        'date',
+    ];
 
     public function getDateAttribute($value)
     {
@@ -64,4 +74,5 @@ class Historic extends Model
     {
         return $query->where('user_id', auth()->user()->id);
     }
+
 }

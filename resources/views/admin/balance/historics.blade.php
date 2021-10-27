@@ -5,9 +5,10 @@
 @section('content_header')
     <h1>Histórico de movimentação</h1>
 
-    <ol class="breadcrumb">
-        <li><a href="">Dashboard</a></li>
-        <li><a href="">Histórico</a></li>
+
+    <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="{{ route('admin') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('historic') }}">Histórico</a></li>
     </ol>
 @stop
 
@@ -25,10 +26,10 @@
                     @endforeach
                 </select>
 
-                <button type="submit" class="btn btn-primary">Pesquisar</button>
+                <button type="submit" class="btn btn-primary" style="margin-left: 1%;">Pesquisar</button>
             </form>
         </div>
-        <div class="box-body">
+        <div class="box-body" style="margin-top: 1%;">
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
@@ -36,25 +37,25 @@
                         <th>Valor</th>
                         <th>Tipo</th>
                         <th>Data</th>
-                        <th>?Sender?</th>
+                        <th>Remetente</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($historics as $historic)
-                    <tr>
-                        <td>{{ $historic->id }}</td>
-                        <td>{{ number_format($historic->amount, 2, '.', '') }}</td>
-                        <td>{{ $historic->type($historic->type) }}</td>
-                        <td>{{ $historic->date }}</td>
-                        <td>
-                            @if($historic->user_id_transaction) 
-                                {{ $historic->userSender->name }}
-                            @else
-                                -    
-                            @endif
-                        </td>
-                    </tr>
-                    @empty
+                        <tr>
+                            <td>{{ $historic->id }}</td>
+                            <td>{{ number_format($historic->amount, 2, '.', '') }}</td>
+                            <td>{{ $historic->type($historic->type) }}</td>
+                            <td>{{ $historic->date }}</td>
+                            <td>
+                                @if($historic->user_id_transaction)
+                                    {{ $historic->userSender->name }}
+                                @else
+                                    -
+                                @endif
+                            </td>
+                        </tr>
+                        @empty
                     @endforelse
                 </tbody>
             </table>
@@ -62,7 +63,7 @@
                 {!! $historics->appends($dataForm)->links() !!}
             @else
                 {!! $historics->links() !!}
-            @endif    
+            @endif
         </div>
     </div>
 @stop

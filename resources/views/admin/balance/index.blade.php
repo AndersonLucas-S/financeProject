@@ -5,26 +5,27 @@
 @section('content_header')
     <h1>Saldo</h1>
 
-    <ol class="breadcrumb">
-        <li><a href="">Dashboard</a></li>
-        <li><a href="">Saldo</a></li>
+    <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="{{ route('admin') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('balance') }}">Saldo</a></li>
     </ol>
 @stop
 
 @section('content')
     <div class="box">
         <div class="box-header">
-            <a href="{{  route('balance.deposit')   }}" class="btn btn-primary"><i class="fas fa-money-check-alt"></i> Recarregar</a>
+            <a href="{{  route('balance.deposit')  }}" class="btn btn-primary" style="margin-bottom: 1%;"><i class="fas fa-money-check-alt"></i> Recarregar</a>
             @if($amount > 0)
-                <a href="{{ route('balance.withdraw') }}" class="btn btn-success"><i class="fas fa-hand-holding-usd"></i> Sacar</a>
+                <a href="{{  route('withdrawn')  }}" class="btn btn-success" style="margin-bottom: 1%;"><i class="fas fa-hand-holding-usd"></i> Sacar</a>
             @endif
             @if($amount > 0)
-                <a href="{{ route('balance.transfer') }}" class="btn btn-info"><i class="fas fa-cart-arrow-down"></i> Transferir</a>
+                <a href="{{ route('transfer') }}" class="btn btn-info" style="margin-bottom: 1%;"><i class="fas fa-cart-arrow-down"></i> Transferir</a>
             @endif
         </div>
         <div class="box-body">
             @include('admin.includes.alerts')
-            <div class="small-box bg-green">
+
+            <div class="small-box bg-success">
                 <div class="inner">
                     <h3>R$ {{  number_format($amount, 2, ',', '')  }}</h3>
                 </div>

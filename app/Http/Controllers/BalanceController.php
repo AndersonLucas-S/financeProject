@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\MoneyValidationFormRequest;
-use App\User;
+use App\Models\User;
 use App\Models\Historic;
 
 class BalanceController extends Controller
 {
-    private $totalPage = 5;
+    private $totalPage = 10;
 
     public function index()
     {
@@ -116,9 +116,9 @@ class BalanceController extends Controller
         $historics = auth()->user()
                             ->historics()
                             ->with(['userSender'])
-                            ->paginate($this->totalPage);
+                            ->simplePaginate($this->totalPage);
 
-        $types = $historic->type();                    
+        $types = $historic->type();
 
         return view('admin.balance.historics', compact('historics', 'types'));
     }
@@ -136,7 +136,6 @@ class BalanceController extends Controller
 
     public function userStore(Request $request)
     {
-        
 
         $user = User::create([
             'name'  => $request->name,
@@ -144,7 +143,7 @@ class BalanceController extends Controller
             'cpf'   => $request->cpf,
             'password' => bcrypt($request->password),
         ])->save();
-        
+
         $msg = 'Cadastro realizado com sucesso';
 
         return redirect()

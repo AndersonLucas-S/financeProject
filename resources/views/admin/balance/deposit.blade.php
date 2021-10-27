@@ -1,14 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Home Dashboard')
+@section('title', 'Nova Recarga')
 
 @section('content_header')
-    <h1>Fazer Recarga</h1>
 
-    <ol class="breadcrumb">
-        <li><a href="">Dashboard</a></li>
-        <li><a href="">Saldo</a></li>
-        <li><a href="">Depositar</a></li>
+    <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="{{ route('admin') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('balance') }}">Saldo</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('balance.deposit') }}">Depositar</a></li>
     </ol>
 @stop
 

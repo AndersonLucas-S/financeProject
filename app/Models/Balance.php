@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use DB;
-use App\User;
 
 class Balance extends Model
 {
+    use HasFactory;
+
     public $timestamps = false;
 
     public function deposit(float $value) : Array
@@ -19,10 +21,10 @@ class Balance extends Model
         $deposit = $this->save();
 
         $historic = auth()->user()->historics()->create([
-            'type'         => 'I', 
-            'amount'       => $value, 
-            'total_before' => $totalBefore, 
-            'total_after'  => $this->amount, 
+            'type'         => 'I',
+            'amount'       => $value,
+            'total_before' => $totalBefore,
+            'total_after'  => $this->amount,
             'date'         => date('Ymd'),
         ]);
 
@@ -59,10 +61,10 @@ class Balance extends Model
         $withdraw = $this->save();
 
         $historic = auth()->user()->historics()->create([
-            'type'         => 'O', 
-            'amount'       => $value, 
-            'total_before' => $totalBefore, 
-            'total_after'  => $this->amount, 
+            'type'         => 'O',
+            'amount'       => $value,
+            'total_before' => $totalBefore,
+            'total_after'  => $this->amount,
             'date'         => date('Ymd'),
         ]);
 
@@ -103,10 +105,10 @@ class Balance extends Model
         $transfer = $this->save();
 
         $historic = auth()->user()->historics()->create([
-            'type'                => 'T', 
-            'amount'              => $value, 
-            'total_before'        => $totalBefore, 
-            'total_after'         => $this->amount, 
+            'type'                => 'T',
+            'amount'              => $value,
+            'total_before'        => $totalBefore,
+            'total_after'         => $this->amount,
             'date'                => date('Ymd'),
             'user_id_transaction' => $sender->id,
         ]);
@@ -120,10 +122,10 @@ class Balance extends Model
         $transferSender = $senderBalance->save();
 
         $historicSender = $sender->historics()->create([
-            'type'                => 'I', 
-            'amount'              => $value, 
-            'total_before'        => $totalBeforeSender, 
-            'total_after'         => $senderBalance->amount, 
+            'type'                => 'I',
+            'amount'              => $value,
+            'total_before'        => $totalBeforeSender,
+            'total_after'         => $senderBalance->amount,
             'date'                => date('Ymd'),
             'user_id_transaction' => auth()->user()->id,
         ]);
@@ -138,7 +140,7 @@ class Balance extends Model
         }
 
         DB::rollback();
-        
+
         return [
             'success' => false,
             'message' => 'Erro ao transferir!'
